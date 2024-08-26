@@ -4,8 +4,11 @@ import path from 'path'
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
-  title: "大数据和ai学习笔记",
-  description: "分享技术和总结",
+  title: "小羊的学习笔记",
+  description: "分享大数据和ai技术和总结",
+  head: [
+    ['link', { rel: 'icon', href: '/favicon.ico' }],
+  ],
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
     nav: [
@@ -43,7 +46,11 @@ export default defineConfig({
         }
         , link: 'https://hadoop.blog.csdn.net/' 
       }
-    ]
+    ],
+    footer: {
+      message: '<a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener noreferrer">鄂ICP备2024048768号</a>',
+      copyright: 'Copyright © 2024-present 数据小羊'
+    }
   }
 })
 
