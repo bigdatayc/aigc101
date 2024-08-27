@@ -1,1 +1,0 @@
-import{_ as a,c as e,o as t,a2 as i}from"./chunks/framework.C94oF1kp.js";const f=JSON.parse('{"title":"编程基础","description":"","frontmatter":{},"headers":[],"relativePath":"编程基础/index.md","filePath":"编程基础/index.md"}'),r={name:"编程基础/index.md"},o=i("",6),l=[o];function n(_,s,c,d,h,p){return t(),e("div",null,l)}const u=a(r,[["render",n]]);export{f as __pageData,u as default};

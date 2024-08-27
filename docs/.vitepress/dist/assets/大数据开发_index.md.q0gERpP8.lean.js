@@ -1,1 +1,0 @@
-import{_ as a,c as e,o as t,a2 as r}from"./chunks/framework.C94oF1kp.js";const f=JSON.parse('{"title":"大数据开发","description":"","frontmatter":{},"headers":[],"relativePath":"大数据开发/index.md","filePath":"大数据开发/index.md"}'),i={name:"大数据开发/index.md"},o=r("",6),n=[o];function l(_,s,d,c,h,p){return t(),e("div",null,n)}const u=a(i,[["render",l]]);export{f as __pageData,u as default};
