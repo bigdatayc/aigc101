@@ -18,7 +18,14 @@ export default defineConfig({
       { text: 'AIGC', link: '/AIGC/' },
       { text: '职场发展', link: '/职场发展/' },
     ],
-
+    search: {
+      provider: 'algolia',
+      options: {
+        appId: 'EOBXTAKFA3',
+        apiKey: 'e6e870cbd7627ad4fa7bc6d495588a99',
+        indexName: 'aigc101'
+      }
+    },
     sidebar: [
       {
         text: '编程基础',
