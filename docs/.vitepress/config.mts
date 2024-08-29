@@ -8,6 +8,20 @@ export default defineConfig({
   description: "分享大数据和ai技术和总结",
   head: [
     ['link', { rel: 'icon', href: '/favicon.ico' }],
+    [
+      'script',
+      { async: '', src: 'https://www.googletagmanager.com/gtag/js?id=G-E310Y4FH69' }
+    ],
+    [
+      'script',
+      {},
+      `
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-E310Y4FH69');
+      `
+    ]
   ],
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
