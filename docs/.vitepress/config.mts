@@ -96,7 +96,7 @@ function generateSidebarForDir(dirPath: string, baseUrl: string) {
         collapsed: true, // 默认折叠子目录
         items: generateSidebarForDir(filePath, `${baseUrl}${file}/`)
       } as never) // 添加类型断言
-    } else if (file.endsWith('.md')) {
+    } else if (file.endsWith('.md')  && file !== 'index.md') {
       // 处理 Markdown 文件
       const name = file.slice(0, -3)
       items.push({
