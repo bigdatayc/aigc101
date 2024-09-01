@@ -27,7 +27,15 @@ export default defineConfig({
     // https://vitepress.dev/reference/default-theme-config
     nav: [
       { text: '首页', link: '/' },
-      { text: '编程基础', link: '/编程基础/' },
+      {
+        text: '编程基础',
+        items: [
+          { text: '网络协议', link: '/编程基础/网络协议/' },
+          { text: '系统设计', link: '/编程基础/系统设计/' },
+          { text: 'git', link: '/编程基础/git/' },
+          { text: '算法', link: '/编程基础/算法/' }
+        ]
+      },
       { text: '大数据开发', link: '/大数据开发/' },
       { text: 'AIGC', link: '/AIGC/' },
       { text: '职场发展', link: '/职场发展/' },
@@ -40,26 +48,7 @@ export default defineConfig({
         indexName: 'aigc101'
       }
     },
-    sidebar: [
-      {
-        text: '编程基础',
-        items: getSidebarItems('编程基础')
-      },
-      {
-        text: '大数据开发',
-        items: getSidebarItems('大数据开发')
-      },
-      {
-        text: 'AIGC',
-        items: getSidebarItems('AIGC')
-      },
-      {
-        text: '职场发展',
-        items: getSidebarItems('职场发展')
-      },
-
-    ],
-
+    sidebar: generateSidebar(),
     socialLinks: [
       { icon: 
         {
@@ -75,15 +64,47 @@ export default defineConfig({
   }
 })
 
-function getSidebarItems(dir: string) {
-  const files = fs.readdirSync(path.join(__dirname, '..', dir))
-  return files
-    .filter(file => file.endsWith('.md') && file !== 'index.md')
-    .map(file => {
+function generateSidebar() {
+  const rootDir = path.join(__dirname, '..')
+  const sidebar = {}
+
+  // 读取根目录下的文件夹
+  const dirs = fs.readdirSync(rootDir).filter(file => 
+    fs.statSync(path.join(rootDir, file)).isDirectory() && !file.startsWith('.')
+  )
+
+  dirs.forEach(dir => {
+    const dirPath = path.join(rootDir, dir)
+    sidebar[`/${dir}/`] = generateSidebarForDir(dirPath, `/${dir}/`)
+  })
+
+  return sidebar
+}
+
+function generateSidebarForDir(dirPath: string, baseUrl: string) {
+  const files = fs.readdirSync(dirPath)
+  const items = []
+
+  files.forEach(file => {
+    const filePath = path.join(dirPath, file)
+    const stat = fs.statSync(filePath)
+
+    if (stat.isDirectory()) {
+      // 递归处理子目录
+      items.push({
+        text: file,
+        collapsed: true, // 默认折叠子目录
+        items: generateSidebarForDir(filePath, `${baseUrl}${file}/`)
+      } as never) // 添加类型断言
+    } else if (file.endsWith('.md')) {
+      // 处理 Markdown 文件
       const name = file.slice(0, -3)
-      return {
+      items.push({
         text: name,
-        link: `/${dir}/${name}`
-      }
-    })
+        link: `${baseUrl}${name}`
+      } as never) // 添加类型断言
+    }
+  })
+
+  return items
 }
